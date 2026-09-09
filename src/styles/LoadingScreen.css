@@ -1,0 +1,108 @@
+/* ==========================================================================
+   STUDIO INTRO / LOGO FILLING ANIMATION - MASSIVE DREAMERS
+   ========================================================================== */
+
+.studio-intro-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #050608;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  user-select: none;
+  transition: background-color 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.studio-intro-overlay.gliding {
+  background-color: rgba(5, 6, 8, 0);
+  pointer-events: none;
+}
+
+/* Hide header logo while intro is filling and flying */
+body.intro-anim-active .studio-header-logo-img {
+  opacity: 0 !important;
+}
+
+.intro-center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Logo Stage Container */
+.intro-logo-stage {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+}
+
+/* Ghost outline behind */
+.intro-logo-ghost {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.12;
+  filter: grayscale(1) brightness(1.5);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.studio-intro-overlay.gliding .intro-logo-ghost {
+  opacity: 0;
+}
+
+/* Masked Liquid Fill Container */
+.intro-logo-fill-mask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Rising Liquid Level */
+.intro-logo-fill-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #ffffff;
+  transition: height 0.05s linear;
+}
+
+/* Subtle glowing white liquid crest */
+.intro-liquid-wave {
+  position: absolute;
+  top: -2px;
+  left: -10%;
+  width: 120%;
+  height: 3px;
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  filter: blur(0.5px);
+}
+
+@media (max-width: 768px) {
+  .intro-logo-stage {
+    width: 120px;
+    height: 120px;
+  }
+}
+

@@ -1,0 +1,124 @@
+.sound-section {
+  width: 100vw;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-dark);
+  padding: 120px 0;
+}
+
+.sound-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 80px;
+}
+
+/* Header */
+.sound-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.sound-tag {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-orange);
+  font-weight: 600;
+}
+
+.sound-title {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+/* Waveform */
+.waveform-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 160px; /* Reduced by 20% */
+  width: auto;
+}
+
+.wave-bar {
+  width: 2px;
+  background-color: rgba(240, 234, 218, 0.4);
+  border-radius: 2px;
+  transform-origin: center;
+  animation: wavePulse ease-in-out infinite alternate;
+}
+
+@keyframes wavePulse {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0.2); }
+}
+
+.wave-orange {
+  background-color: var(--accent-orange);
+  opacity: 0.8;
+}
+
+/* Footer */
+.sound-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.sound-meta {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: rgba(240, 234, 218, 0.4);
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+.sound-artist {
+  color: var(--text-main);
+}
+
+.sound-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(240, 234, 218, 0.2);
+  color: var(--text-main);
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sound-btn:hover {
+  background-color: rgba(240, 234, 218, 0.05);
+  border-color: rgba(240, 234, 218, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sound-container {
+    padding: 0 24px;
+  }
+  .waveform-container {
+    gap: 2px;
+  }
+}

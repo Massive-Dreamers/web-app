@@ -1,0 +1,79 @@
+/* ==========================================================================
+   404 — MASSIVE DREAMERS
+   ========================================================================== */
+
+.notfound-page {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.notfound-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(40% 40% at 20% 30%, rgba(217, 119, 70, 0.08), transparent 60%),
+    radial-gradient(30% 30% at 80% 70%, rgba(217, 119, 70, 0.05), transparent 65%);
+}
+
+.notfound-content {
+  max-width: 640px;
+  text-align: left;
+}
+
+.notfound-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  margin-bottom: 2rem;
+}
+
+.notfound-code {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(6rem, 20vw, 12rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.notfound-copy {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-bottom: 2rem;
+  max-width: 42ch;
+}
+
+.notfound-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.25s ease, color 0.25s ease, gap 0.25s ease;
+}
+
+.notfound-link:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  gap: 0.75rem;
+}

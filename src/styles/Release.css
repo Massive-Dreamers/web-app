@@ -1,0 +1,287 @@
+.release-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem;
+  overflow: hidden;
+  background-color: #0c0806;
+}
+
+.release-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/release_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.65;
+  z-index: 0;
+  filter: brightness(0.75) contrast(1.15);
+}
+
+.release-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(12, 8, 6, 0.45) 0%, rgba(12, 8, 6, 0.85) 100%),
+              linear-gradient(to top, rgba(12, 8, 6, 0.8) 0%, transparent 50%),
+              linear-gradient(to bottom, rgba(12, 8, 6, 0.8) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.release-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.release-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.release-subtitle, .release-tag {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--accent-orange);
+  margin-bottom: 4px;
+}
+
+.release-year {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(8rem, 20vw, 16rem);
+  font-weight: 900;
+  line-height: 0.8;
+  color: var(--text-main);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+.release-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.wishlist-btn {
+  background-color: var(--text-main);
+  color: var(--bg-dark);
+  font-family: 'Saira', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 16px 32px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.steam-btn-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+.wishlist-btn:hover {
+  background-color: var(--accent-orange);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.wishlist-btn:hover .steam-btn-icon {
+  filter: brightness(0) invert(1);
+}
+
+.notify-btn {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  font-family: 'Saira', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 16px 28px;
+  border: 1px solid rgba(240, 234, 218, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.notify-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-orange);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+/* Modal Styles */
+.notify-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.notify-modal-content {
+  background: #110d0b;
+  border: 1px solid rgba(240, 234, 218, 0.2);
+  box-shadow: none;
+  padding: 40px;
+  max-width: 460px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.notify-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 4px;
+}
+
+.notify-modal-close:hover {
+  color: var(--text-main);
+}
+
+.notify-modal-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(224, 90, 43, 0.12);
+  border: 1px solid rgba(224, 90, 43, 0.3);
+  color: var(--accent-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.notify-modal-title {
+  font-family: 'Saira', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.notify-modal-desc {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.notify-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.notify-modal-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(240, 234, 218, 0.2);
+  color: var(--text-main);
+  font-family: 'Saira', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.notify-modal-input:focus {
+  border-color: var(--accent-orange);
+}
+
+.notify-modal-submit {
+  background: var(--accent-orange);
+  color: #fff;
+  border: none;
+  font-family: 'Saira', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notify-modal-submit:hover {
+  background: #f26d36;
+  transform: translateY(-1px);
+}
+
+.notify-modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+@media (max-width: 1024px) {
+  .release-section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .release-section {
+    padding: 3.5rem 1rem;
+  }
+  .release-action {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+  .wishlist-btn, .notify-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

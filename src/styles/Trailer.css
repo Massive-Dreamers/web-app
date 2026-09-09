@@ -1,0 +1,452 @@
+/* ==========================================================================
+   TRAILER SECTION - CINEMATIC FRAMED REDESIGN
+   ========================================================================== */
+
+.trailer-section {
+  position: relative;
+  width: 100vw;
+  padding: 6.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark, #0f0a08);
+}
+
+/* Atmospheric Ambient Background Glow */
+.trailer-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  max-width: 1100px;
+  background: radial-gradient(ellipse at center, rgba(217, 119, 70, 0.08) 0%, rgba(15, 10, 8, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.trailer-outer-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 24px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Framed Video Wrapper */
+.trailer-frame-wrapper {
+  position: relative;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.trailer-video-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  overflow: hidden;
+  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.trailer-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.1);
+  transition: filter 0.3s ease;
+  display: block;
+}
+
+.trailer-video-element.hidden-in-section {
+  opacity: 0.35;
+}
+
+/* Edge Vignette */
+.trailer-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 45%, rgba(6, 8, 11, 0.75) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* SVG Distressed Brush Frame Overlay */
+.trailer-brush-frame {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Splat Play Button (Centered in frame) */
+.trailer-splat-center-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.splat-play-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  transition: filter 0.25s ease;
+}
+
+.splat-play-btn:hover {
+  filter: brightness(1.15);
+}
+
+/* Center Feedback Animation (Play/Pause Flash) */
+.center-feedback-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 0;
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* YouTube-Style Bottom Controls */
+.yt-controls-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 20px 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: auto;
+}
+
+.yt-controls-container.hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.yt-controls-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline Progress Bar */
+.yt-progress-bar-container {
+  width: 100%;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.yt-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 0;
+  position: relative;
+  transition: height 0.15s ease;
+}
+
+.yt-progress-bar-container:hover .yt-progress-track {
+  height: 5px;
+}
+
+.yt-progress-filled {
+  height: 100%;
+  background: #e05a2b;
+  border-radius: 0;
+  position: relative;
+}
+
+.yt-progress-scrubber {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 0;
+  background: #e05a2b;
+  transition: transform 0.15s ease;
+}
+
+.yt-progress-bar-container:hover .yt-progress-scrubber {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Controls Buttons Row */
+.yt-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.yt-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.yt-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.yt-ctrl-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 0;
+  transition: all 0.2s ease;
+}
+
+.yt-ctrl-btn:hover {
+  color: #e05a2b;
+  transform: scale(1.08);
+}
+
+/* Volume Slider */
+.yt-volume-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.yt-volume-slider {
+  width: 0;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: width 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  accent-color: #e05a2b;
+  cursor: pointer;
+  height: 4px;
+}
+
+.yt-volume-group:hover .yt-volume-slider {
+  width: 65px;
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Time Display */
+.yt-time-display {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+
+.yt-time-sep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Floating Mini-Player (Picture-in-Picture Style) */
+.trailer-mini-player {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 350px;
+  max-width: calc(100vw - 40px);
+  background: rgba(12, 14, 18, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  overflow: hidden;
+  z-index: 9999;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(18, 22, 28, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mini-player-title {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-player-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mini-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  width: 24px;
+  height: 24px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mini-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.mini-btn-close:hover {
+  background: rgba(235, 87, 87, 0.2);
+  color: #ff5e5e;
+}
+
+.mini-player-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.mini-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-player-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mini-player-video-wrap:hover .mini-player-hover-overlay {
+  opacity: 1;
+}
+
+.mini-play-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  background: rgba(14, 14, 14, 0.75);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.mini-player-video-wrap:hover .mini-play-icon {
+  transform: scale(1.08);
+}
+
+.mini-player-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(18, 22, 28, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mini-footer-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 0;
+  transition: all 0.2s ease;
+}
+
+.mini-footer-btn:hover {
+  color: #e05a2b;
+}
+
+@media (max-width: 768px) {
+  .trailer-section {
+    padding: 4rem 1rem;
+  }
+  .trailer-mini-player {
+    bottom: 16px;
+    right: 16px;
+    width: 270px;
+  }
+}

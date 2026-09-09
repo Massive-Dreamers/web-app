@@ -1,0 +1,145 @@
+.characters-section {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  padding: 100px 48px;
+}
+
+.characters-header {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.character-tag {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-orange);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.characters-header h2 {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.character-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(240, 234, 218, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(240, 234, 218, 0.15);
+}
+
+.character-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(240, 234, 218, 0.05);
+  background-color: #1a1a1a;
+}
+
+.character-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  background: rgba(14, 14, 14, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(240, 234, 218, 0.15);
+  color: var(--accent-orange);
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 6px 12px;
+  border-radius: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.character-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8) contrast(1.1);
+  transition: filter 0.3s ease, transform 0.5s ease;
+}
+
+.character-card:hover .character-card-img {
+  filter: brightness(1) contrast(1.2);
+  transform: scale(1.05);
+}
+
+.character-card-content {
+  padding: 32px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-card-name {
+  font-family: 'Saira', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.character-card-role {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: rgba(240, 234, 218, 0.5);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.character-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .characters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .characters-section {
+    padding: 80px 24px;
+  }
+  .characters-grid {
+    grid-template-columns: 1fr;
+  }
+  .character-card-img-wrapper {
+    aspect-ratio: 16/9;
+  }
+}

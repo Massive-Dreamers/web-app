@@ -1,0 +1,156 @@
+.world-section-container {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--bg-dark);
+  padding: 100px 48px;
+}
+
+.world-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.world-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.world-title {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 24px;
+}
+
+.world-paragraph {
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  color: var(--text-dim);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+/* Cards Grid matching Characters styling */
+.world-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+.world-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(240, 234, 218, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.world-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(240, 234, 218, 0.15);
+}
+
+.world-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(240, 234, 218, 0.05);
+  background-color: #1a1a1a;
+}
+
+.world-card-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  background: rgba(14, 14, 14, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(240, 234, 218, 0.15);
+  color: var(--accent-orange);
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  padding: 6px 12px;
+  border-radius: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.world-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.1);
+  transition: filter 0.3s ease, transform 0.5s ease;
+}
+
+.world-card:hover .world-card-img {
+  filter: brightness(1) contrast(1.2);
+  transform: scale(1.05);
+}
+
+.world-card-content {
+  padding: 32px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.world-card-title {
+  font-family: 'Saira', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.world-card-category {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: rgba(240, 234, 218, 0.5);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.world-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .world-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .world-section-container {
+    padding: 80px 24px;
+  }
+  .world-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .world-card-img-wrapper {
+    aspect-ratio: 16/9;
+  }
+}

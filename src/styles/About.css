@@ -1,0 +1,214 @@
+/* ==========================================================================
+   ABOUT PAGE — MASSIVE DREAMERS
+   ========================================================================== */
+
+.about-page {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  padding-top: 7rem;
+  padding-bottom: 6rem;
+}
+
+.about-main {
+  max-width: 1180px;
+}
+
+/* ---------- Lede ---------- */
+.about-lede {
+  max-width: 760px;
+  margin: 0 auto 6rem;
+  text-align: left;
+}
+
+.about-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+
+.about-title {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+  margin-bottom: 1.75rem;
+}
+
+.about-lede-body {
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--text-dim);
+  max-width: 62ch;
+}
+
+/* ---------- Story ---------- */
+.about-story {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 3rem;
+  padding: 3rem 0;
+  margin-bottom: 5rem;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.about-story-label,
+.about-section-label {
+  font-family: 'Saira', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+  padding-top: 0.35rem;
+}
+
+.about-story-body {
+  max-width: 60ch;
+}
+
+.about-story-body p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-main);
+  margin-bottom: 1.25rem;
+}
+
+.about-story-body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-story-body strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* ---------- Pull quote ---------- */
+.about-pull {
+  max-width: 820px;
+  margin: 0 auto 6rem;
+  text-align: left;
+  padding: 3rem 0;
+}
+
+.about-pull p {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  max-width: 32ch;
+}
+
+.about-pull footer {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ---------- Pillars ---------- */
+.about-pillars-heading {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.about-pillars-heading h2 {
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-main);
+  max-width: 20ch;
+}
+
+.about-pillars-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-pillar-row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-light);
+  margin-left: var(--pillar-indent, 0);
+}
+
+.about-pillar-row:last-child {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.about-pillar-index {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.about-pillar-num {
+  font-family: 'Inter', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+}
+
+.about-pillar-title {
+  font-family: 'Saira', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.005em;
+}
+
+.about-pillar-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  max-width: 56ch;
+  padding-top: 0.2rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 820px) {
+  .about-page {
+    padding-top: 6rem;
+  }
+
+  .about-story,
+  .about-pillars-heading,
+  .about-pillar-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .about-pillar-row {
+    margin-left: 0 !important;
+    padding: 1.75rem 0;
+  }
+
+  .about-story {
+    padding: 2rem 0;
+  }
+
+  .about-pull {
+    margin-bottom: 4rem;
+  }
+}
