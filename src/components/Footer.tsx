@@ -51,7 +51,6 @@ export default function Footer() {
         
         <div className="footer-bottom">
           <div className="footer-copyright">© 2027 Massive Dreamers. All Rights Reserved.</div>
-          <div className="footer-location">Baku, Azerbaijan • Independent Game Studio</div>
         </div>
         
       </div>

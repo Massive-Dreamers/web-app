@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ABOUT PAGE — MASSIVE DREAMERS
+   ABOUT — MASSIVE DREAMERS (bold statement + editorial narrative + pillars)
    ========================================================================== */
 
 .about-page {
@@ -7,208 +7,214 @@
   background-color: var(--bg-dark);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
-  padding-top: 7rem;
-  padding-bottom: 6rem;
+}
+
+.about-content-wrap {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 14rem;
+  padding-bottom: clamp(8rem, 14vh, 12rem);
+}
+
+.about-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .about-main {
-  max-width: 1180px;
+  position: relative;
+  z-index: 1;
+  max-width: 1240px;
 }
 
-/* ---------- Lede ---------- */
-.about-lede {
-  max-width: 760px;
-  margin: 0 auto 6rem;
-  text-align: left;
+/* ---------- Hero statement ---------- */
+.about-hero {
+  max-width: 1120px;
+  margin: 0 0 clamp(5rem, 12vh, 9rem);
 }
 
-.about-meta {
+.about-hero-statement {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin: 0;
+  gap: 0.05em;
+}
+
+.about-hero-line {
+  display: block;
+}
+
+.about-hero-line-em {
+  color: var(--accent-orange);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Narrative ---------- */
+.about-narrative {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(3rem, 6vh, 5rem) 0;
+  margin-bottom: clamp(4rem, 8vh, 7rem);
+  border-top: 1px solid rgba(240, 234, 218, 0.08);
+  border-bottom: 1px solid rgba(240, 234, 218, 0.08);
+}
+
+.about-narrative-label {
   font-family: 'Inter', sans-serif;
   font-size: 0.72rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 2rem;
-}
-
-.about-title {
-  font-family: 'Saira', sans-serif;
-  font-size: clamp(2.4rem, 5.5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--text-main);
-  margin-bottom: 1.75rem;
-}
-
-.about-lede-body {
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-  line-height: 1.65;
-  color: var(--text-dim);
-  max-width: 62ch;
-}
-
-/* ---------- Story ---------- */
-.about-story {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 3rem;
-  padding: 3rem 0;
-  margin-bottom: 5rem;
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.about-story-label,
-.about-section-label {
-  font-family: 'Saira', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent-orange);
   padding-top: 0.35rem;
 }
 
-.about-story-body {
-  max-width: 60ch;
+.about-narrative-body {
+  max-width: 62ch;
 }
 
-.about-story-body p {
-  font-size: 1.05rem;
-  line-height: 1.75;
+.about-narrative-body p {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.7;
   color: var(--text-main);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
-.about-story-body p:last-child {
+.about-narrative-body p:last-child {
   margin-bottom: 0;
 }
 
-.about-story-body strong {
+.about-narrative-body strong {
   color: var(--text-main);
   font-weight: 600;
 }
 
-/* ---------- Pull quote ---------- */
-.about-pull {
-  max-width: 820px;
-  margin: 0 auto 6rem;
-  text-align: left;
-  padding: 3rem 0;
-}
-
-.about-pull p {
-  font-family: 'Saira', sans-serif;
-  font-size: clamp(1.5rem, 3vw, 2.15rem);
-  line-height: 1.35;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  color: var(--text-main);
-  margin-bottom: 1.5rem;
-  max-width: 32ch;
-}
-
-.about-pull footer {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
 /* ---------- Pillars ---------- */
-.about-pillars-heading {
-  display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 3rem;
-  margin-bottom: 3rem;
+.about-pillars {
+  max-width: 1080px;
 }
 
-.about-pillars-heading h2 {
+.about-pillars-heading {
   font-family: 'Saira', sans-serif;
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: var(--text-main);
-  max-width: 20ch;
+  margin-bottom: 3rem;
 }
 
 .about-pillars-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.about-pillar-row {
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  gap: 3rem;
-  padding: 2rem 0;
-  border-top: 1px solid var(--border-light);
-  margin-left: var(--pillar-indent, 0);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
 }
 
-.about-pillar-row:last-child {
-  border-bottom: 1px solid var(--border-light);
-}
-
-.about-pillar-index {
+.about-pillar {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  background: rgba(10, 12, 15, 0.4);
+  border: 1px solid rgba(240, 234, 218, 0.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  isolation: isolate;
+  overflow: hidden;
+  transition: border-color 0.4s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-pillar::before {
+  content: '';
+  position: absolute;
+  inset: -40% -40% auto auto;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 119, 70, 0.18) 0%, rgba(217, 119, 70, 0) 60%);
+  filter: blur(50px);
+  z-index: -1;
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+}
+
+.about-pillar:hover {
+  border-color: rgba(217, 119, 70, 0.35);
+  transform: translateY(-6px);
+}
+
+.about-pillar:hover::before {
+  opacity: 1;
 }
 
 .about-pillar-num {
-  font-family: 'Inter', monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  color: var(--text-dim);
+  font-family: 'Saira', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--accent-orange);
+}
+
+.about-pillar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
 .about-pillar-title {
   font-family: 'Saira', sans-serif;
-  font-size: 1.35rem;
+  font-size: clamp(1.25rem, 1.85vw, 1.55rem);
   font-weight: 700;
-  color: var(--text-main);
+  line-height: 1.15;
   letter-spacing: -0.005em;
+  color: var(--text-main);
+  margin: 0;
 }
 
 .about-pillar-body {
-  font-size: 1rem;
-  line-height: 1.7;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
   color: var(--text-dim);
-  max-width: 56ch;
-  padding-top: 0.2rem;
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 820px) {
-  .about-page {
-    padding-top: 6rem;
+@media (max-width: 1000px) {
+  .about-pillars-list {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .about-story,
-  .about-pillars-heading,
-  .about-pillar-row {
+@media (max-width: 820px) {
+  .about-narrative {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  .about-pillar-row {
-    margin-left: 0 !important;
-    padding: 1.75rem 0;
+  .about-pillars-list {
+    grid-template-columns: 1fr;
   }
 
-  .about-story {
-    padding: 2rem 0;
-  }
-
-  .about-pull {
-    margin-bottom: 4rem;
+  .about-hero-statement {
+    font-size: clamp(2rem, 8vw, 3.5rem);
   }
 }

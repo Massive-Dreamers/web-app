@@ -1,78 +1,37 @@
-import { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, ArrowDown } from 'lucide-react';
-import roomsImg from '../assets/rooms.png';
-import dialogCardImg from '../assets/dialog_card.png';
-import buildingsImg from '../assets/buildings.png';
+import { ArrowRight, Play, ArrowDown, X } from 'lucide-react';
+import trailerVideo from '../assets/trailer.mp4';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
+import AbstractField from '../components/AbstractField';
+import { games } from '../data/games';
+import { dispatches } from '../data/dispatches';
 import '../styles/StudioHome.css';
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
-const slate = [
-  {
-    id: 'mind-your-stay',
-    index: 'I',
-    title: 'Mind Your Stay',
-    status: 'In development',
-    release: '2027',
-    genre: 'Narrative RPG',
-    image: roomsImg,
-    href: '/mind-your-stay',
-    flagship: true,
-  },
-  {
-    id: 'echo-horizon',
-    index: 'II',
-    title: 'Project Echo Horizon',
-    status: 'Concept',
-    release: 'TBA',
-    genre: 'Sci-fi mystery',
-    image: buildingsImg,
-    href: '/games',
-    flagship: false,
-  },
-  {
-    id: 'chrono-archive',
-    index: 'III',
-    title: 'Project Chrono Archive',
-    status: 'Concept',
-    release: 'TBA',
-    genre: 'Historical investigation',
-    image: dialogCardImg,
-    href: '/games',
-    flagship: false,
-  },
-];
+const slate = games.map((g) => ({
+  id: g.slug,
+  index: g.index,
+  title: g.title,
+  status: g.statusLabel,
+  release: g.release,
+  genre: g.genre,
+  image: g.image,
+  href: g.href ?? '/games',
+  flagship: g.flagship,
+}));
 
-const dispatchPreview = [
-  {
-    id: 'reveal',
-    title: 'Massive Dreamers reveals Mind Your Stay for PC',
-    category: 'Announcement',
-    date: 'August 2026',
-    image: roomsImg,
-    href: '/news',
-  },
-  {
-    id: 'dialogue',
-    title: 'The architecture of branching dialogue in Mind Your Stay',
-    category: 'Devlog',
-    date: 'September 2026',
-    image: dialogCardImg,
-    href: '/news',
-  },
-  {
-    id: 'noir',
-    title: 'Designing Safe Haven: pixel art, noir lighting, spatial mood',
-    category: 'Design Diary',
-    date: 'July 2026',
-    image: buildingsImg,
-    href: '/news',
-  },
-];
+const dispatchPreview = dispatches.slice(0, 3).map((d) => ({
+  id: d.id,
+  title: d.title,
+  category: d.category,
+  date: d.date,
+  image: d.image,
+  href: d.href,
+}));
 
 const pillars = [
   {
@@ -91,34 +50,6 @@ const pillars = [
     body: 'Choices leave marks. The world remembers what you did and what you refused.',
   },
 ];
-
-function AbstractField() {
-  return (
-    <div className="home-hero-field" aria-hidden>
-      <motion.div
-        className="home-hero-orb orb-1"
-        animate={{ x: ['0%', '20%', '-10%', '0%'], y: ['0%', '-15%', '10%', '0%'] }}
-        transition={{ duration: 42, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="home-hero-orb orb-2"
-        animate={{ x: ['0%', '-15%', '20%', '0%'], y: ['0%', '20%', '-10%', '0%'] }}
-        transition={{ duration: 55, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="home-hero-orb orb-3"
-        animate={{ x: ['0%', '10%', '-15%', '0%'], y: ['0%', '-8%', '15%', '0%'] }}
-        transition={{ duration: 68, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="home-hero-lines"
-        animate={{ backgroundPositionY: ['0%', '100%'] }}
-        transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-      />
-      <div className="home-hero-grain" />
-    </div>
-  );
-}
 
 function HeroSection() {
   const ref = useRef<HTMLElement>(null);
@@ -139,38 +70,45 @@ function HeroSection() {
 
       <motion.div className="home-hero-content" style={{ y: contentY, opacity: contentOpacity }}>
         <div className="studio-container home-hero-inner">
-          <motion.div
-            className="home-hero-eyebrow"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4, ease: easeOut }}
-          >
-            <span className="home-hero-dot" aria-hidden />
-            Independent studio &middot; Baku, Azerbaijan
-          </motion.div>
-
           <motion.h1
             className="home-hero-title"
             initial="hidden"
             animate="visible"
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.6 } },
+              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.4 } },
             }}
           >
-            {['Massive', 'Dreamers'].map((word, i) => (
-              <span key={i} className="home-hero-title-clip">
-                <motion.span
-                  className="home-hero-title-word"
-                  variants={{
-                    hidden: { y: '105%' },
-                    visible: { y: '0%', transition: { duration: 1.05, ease: easeOut } },
-                  }}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
+            <span className="home-hero-title-row home-hero-title-row-welcome">
+              {['Welcome', 'to'].map((word, i) => (
+                <span key={i} className="home-hero-title-clip">
+                  <motion.span
+                    className="home-hero-title-word"
+                    variants={{
+                      hidden: { y: '105%' },
+                      visible: { y: '0%', transition: { duration: 0.9, ease: easeOut } },
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
+            </span>
+            <span className="home-hero-title-row">
+              {['Massive', 'Dreamers'].map((word, i) => (
+                <span key={i} className="home-hero-title-clip">
+                  <motion.span
+                    className="home-hero-title-word"
+                    variants={{
+                      hidden: { y: '105%' },
+                      visible: { y: '0%', transition: { duration: 1.05, ease: easeOut } },
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+              ))}
+            </span>
           </motion.h1>
 
           <motion.p
@@ -179,9 +117,7 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.55, ease: easeOut }}
           >
-            We build worlds you don&rsquo;t leave. Slow, deliberate,
-            <br className="home-hero-desc-break" />
-            narrative-first games from an independent studio.
+            We&rsquo;re an indie studio from Azerbaijan trying to turn dreams into reality.
           </motion.p>
 
           <motion.div
@@ -231,7 +167,6 @@ function SlateSection() {
           transition={{ duration: 0.8, ease: easeOut }}
         >
           <div>
-            <div className="home-section-label">The Slate</div>
             <h2 className="home-section-title">Three worlds we are making.</h2>
           </div>
           <Link to="/games" className="home-section-link">
@@ -251,8 +186,17 @@ function SlateSection() {
             >
               <Link to={s.href} className="home-slate-link">
                 <div className="home-slate-media">
-                  <img src={s.image} alt={s.title} className="home-slate-img" />
-                  <div className="home-slate-scrim" aria-hidden />
+                  {s.flagship ? (
+                    <>
+                      <img src={s.image} alt={s.title} className="home-slate-img" />
+                      <div className="home-slate-scrim" aria-hidden />
+                    </>
+                  ) : (
+                    <div className="home-slate-placeholder" aria-hidden>
+                      <div className="home-slate-placeholder-blur" />
+                      <span className="home-slate-placeholder-label">Coming Soon</span>
+                    </div>
+                  )}
                   <span className="home-slate-index" aria-hidden>{s.index}</span>
                 </div>
 
@@ -262,8 +206,14 @@ function SlateSection() {
                     <span aria-hidden>&middot;</span>
                     <span>{s.release}</span>
                   </div>
-                  <h3 className="home-slate-title">{s.title}</h3>
-                  <div className="home-slate-genre">{s.genre}</div>
+                  {s.flagship ? (
+                    <>
+                      <h3 className="home-slate-title">{s.title}</h3>
+                      <div className="home-slate-genre">{s.genre}</div>
+                    </>
+                  ) : (
+                    <h3 className="home-slate-title home-slate-title-concept">Project XXX</h3>
+                  )}
                 </div>
               </Link>
             </motion.article>
@@ -287,16 +237,6 @@ function ManifestoSection() {
       </div>
 
       <div className="studio-container home-manifesto-content">
-        <motion.div
-          className="home-section-label home-section-label-inline"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.8, ease: easeOut }}
-        >
-          Studio philosophy
-        </motion.div>
-
         <motion.h2
           className="home-manifesto-title"
           initial={{ opacity: 0, y: 30 }}
@@ -344,7 +284,7 @@ function ManifestoSection() {
   );
 }
 
-function TrailerSection() {
+function TrailerSection({ onOpen }: { onOpen: () => void }) {
   return (
     <section className="home-trailer">
       <div className="home-trailer-bg" aria-hidden>
@@ -357,16 +297,6 @@ function TrailerSection() {
       <div className="home-trailer-overlay" aria-hidden />
 
       <div className="studio-container home-trailer-container">
-        <motion.div
-          className="home-section-label home-section-label-inline"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7, ease: easeOut }}
-        >
-          Latest teaser
-        </motion.div>
-
         <motion.h2
           className="home-trailer-title"
           initial={{ opacity: 0, y: 30 }}
@@ -393,23 +323,81 @@ function TrailerSection() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.9, delay: 0.45, ease: easeOut }}
         >
-          <Link to="/mind-your-stay#trailer" className="home-trailer-cta">
+          <button type="button" onClick={onOpen} className="home-trailer-cta">
             <span className="home-trailer-play">
               <Play size={16} fill="currentColor" />
             </span>
             Watch the trailer
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>
   );
 }
 
+function TrailerModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open, onClose]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="trailer-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mind Your Stay trailer"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35, ease: easeOut }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="trailer-modal-shell"
+            initial={{ opacity: 0, scale: 0.96, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            transition={{ duration: 0.45, ease: easeOut }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="trailer-modal-close"
+              onClick={onClose}
+              aria-label="Close trailer"
+            >
+              <X size={16} />
+            </button>
+            <video
+              className="trailer-modal-video"
+              controls
+              autoPlay
+              playsInline
+              src={trailerVideo}
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function StudioHome() {
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
-
-  const [lead, ...secondaries] = dispatchPreview;
+  const [trailerOpen, setTrailerOpen] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -441,7 +429,6 @@ export default function StudioHome() {
             transition={{ duration: 0.8, ease: easeOut }}
           >
             <div>
-              <div className="home-section-label">Newswire</div>
               <h2 className="home-section-title">Dispatches from the studio.</h2>
             </div>
             <Link to="/news" className="home-section-link">
@@ -450,105 +437,85 @@ export default function StudioHome() {
           </motion.div>
 
           <div className="home-dispatches-grid">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.85, ease: easeOut }}
-            >
-              <Link to={lead.href} className="home-dispatch-lead">
-                <div className="home-dispatch-lead-media">
-                  <img src={lead.image} alt={lead.title} />
-                  <div className="home-dispatch-lead-scrim" aria-hidden />
-                </div>
-                <div className="home-dispatch-lead-body">
-                  <div className="home-dispatch-meta">
-                    <span className="home-dispatch-cat">{lead.category}</span>
-                    <span aria-hidden>&middot;</span>
-                    <span>{lead.date}</span>
+            {dispatchPreview.map((d, i) => (
+              <motion.article
+                key={d.id}
+                className="home-dispatch-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.75, delay: i * 0.1, ease: easeOut }}
+              >
+                <Link to={d.href} className="home-dispatch-link">
+                  <div className="home-dispatch-media">
+                    <img src={d.image} alt={d.title} />
                   </div>
-                  <h3>{lead.title}</h3>
-                  <span className="home-dispatch-read">
-                    Read the dispatch <ArrowRight size={13} />
-                  </span>
-                </div>
-              </Link>
-            </motion.div>
-
-            <ul className="home-dispatch-list">
-              {secondaries.map((d, i) => (
-                <motion.li
-                  key={d.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.7, delay: 0.1 + i * 0.1, ease: easeOut }}
-                >
-                  <Link to={d.href} className="home-dispatch-row">
-                    <div className="home-dispatch-row-thumb">
-                      <img src={d.image} alt="" />
+                  <div className="home-dispatch-body">
+                    <div className="home-dispatch-meta">
+                      <span className="home-dispatch-cat">{d.category}</span>
+                      <span aria-hidden>&middot;</span>
+                      <span>{d.date}</span>
                     </div>
-                    <div className="home-dispatch-row-body">
-                      <div className="home-dispatch-meta">
-                        <span className="home-dispatch-cat">{d.category}</span>
-                        <span aria-hidden>&middot;</span>
-                        <span>{d.date}</span>
-                      </div>
-                      <h4>{d.title}</h4>
-                    </div>
-                    <ArrowRight size={16} className="home-dispatch-row-arrow" />
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
+                    <h3 className="home-dispatch-title">{d.title}</h3>
+                    <span className="home-dispatch-read">
+                      Read <ArrowRight size={14} />
+                    </span>
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
           </div>
         </div>
       </section>
 
       <ManifestoSection />
 
-      <TrailerSection />
+      <TrailerSection onOpen={() => setTrailerOpen(true)} />
+
+      <TrailerModal open={trailerOpen} onClose={() => setTrailerOpen(false)} />
 
       {/* ---------- Dispatch signup ---------- */}
       <section className="home-signup" id="contact">
-        <div className="studio-container home-signup-container">
+        <div className="studio-container">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            className="home-signup-card"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, ease: easeOut }}
+            transition={{ duration: 0.85, ease: easeOut }}
           >
-            <div className="home-section-label">Dispatch</div>
-            <h2 className="home-signup-title">Quiet notes from the studio, in your inbox.</h2>
-            <p className="home-signup-desc">
-              Devlogs, announcements, playtest invitations. No hype, no schedule.
-            </p>
-          </motion.div>
+            <div className="home-signup-card-glow" aria-hidden />
+            <div className="home-signup-container">
+              <div>
+                <h2 className="home-signup-title">
+                  Quiet notes from the studio, in your inbox.
+                </h2>
+                <p className="home-signup-desc">
+                  Devlogs, announcements, playtest invitations. No hype, no schedule.
+                </p>
+              </div>
 
-          <motion.form
-            onSubmit={handleSubscribe}
-            className="home-signup-form"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, delay: 0.15, ease: easeOut }}
-          >
-            <input
-              type="email"
-              placeholder="you@domain.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="home-signup-input"
-              aria-label="Email address"
-            />
-            <button type="submit" className="home-signup-btn">
-              {subscribed ? 'Subscribed' : 'Subscribe'}
-            </button>
-            {subscribed && (
-              <span className="home-signup-msg">Thank you. We&rsquo;ll write soon.</span>
-            )}
-          </motion.form>
+              <form onSubmit={handleSubscribe} className="home-signup-form">
+                <input
+                  type="email"
+                  placeholder="you@domain.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="home-signup-input"
+                  aria-label="Email address"
+                />
+                <button type="submit" className="home-signup-btn">
+                  {subscribed ? 'Subscribed' : 'Subscribe'}
+                </button>
+                {subscribed && (
+                  <span className="home-signup-msg">
+                    Thank you. We&rsquo;ll write soon.
+                  </span>
+                )}
+              </form>
+            </div>
+          </motion.div>
         </div>
       </section>
 
