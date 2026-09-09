@@ -30,3 +30,14 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+## Deployment
+
+The site is deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`:
+`npm ci` → `npm run build` → the `dist/` folder is published.
+
+Repository setting required: **Settings → Pages → Build and deployment → Source = GitHub Actions**.
+
+The custom domain lives in `public/CNAME`, so Vite copies it into `dist/` on every build.
+The build also writes `dist/404.html` as a copy of `index.html` so deep links like `/games`
+work on refresh (GitHub Pages does not rewrite unknown paths to `index.html`).
