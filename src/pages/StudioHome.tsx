@@ -3,12 +3,15 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play, ArrowDown, X } from 'lucide-react';
 import trailerVideo from '../assets/trailer.mp4';
+import steamLogo from '../assets/steamlogo.png';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
 import { games } from '../data/games';
 import { dispatches } from '../data/dispatches';
 import '../styles/StudioHome.css';
+
+const flagshipGame = games.find((g) => g.flagship);
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -151,7 +154,101 @@ function HeroSection() {
           <ArrowDown size={14} />
         </motion.span>
       </motion.div>
+
     </section>
+  );
+}
+
+function FloatingPromo({ onClose }: { onClose: () => void }) {
+  if (!flagshipGame) return null;
+
+  return (
+    <motion.aside
+      className="home-floating-promo"
+      initial={{ opacity: 0, y: 60, scale: 0.94 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+          duration: 0.9,
+          delay: 4.5,
+          ease: [0.16, 1, 0.3, 1],
+          opacity: { duration: 0.55, delay: 4.5, ease: 'easeOut' },
+        },
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0.94,
+        transition: { duration: 0.12, ease: 'easeOut' },
+      }}
+      aria-label="New game announcement"
+    >
+      <motion.div
+        className="home-floating-promo-float"
+        animate={{ y: [0, -8, 0] }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 5.4,
+        }}
+      >
+        <button
+          className="home-hero-promo-close"
+          onClick={onClose}
+          aria-label="Dismiss"
+        >
+          <X size={14} />
+        </button>
+
+        <div className="home-floating-promo-inner">
+      <Link to={flagshipGame.href ?? '/games'} className="home-hero-promo-media">
+        <img src={flagshipGame.image} alt={flagshipGame.title} />
+        <span className="home-hero-promo-tag">
+          <span className="home-hero-promo-pulse" aria-hidden />
+          New
+        </span>
+      </Link>
+
+      <div className="home-hero-promo-body">
+        <div className="home-hero-promo-info">
+          <div className="home-hero-promo-meta">
+            {flagshipGame.statusLabel} &middot; {flagshipGame.release}
+          </div>
+          <Link
+            to={flagshipGame.href ?? '/games'}
+            className="home-hero-promo-title"
+          >
+            {flagshipGame.title}
+          </Link>
+          <p className="home-hero-promo-desc">
+            Talk to the guests of Safe Haven &mdash; a hotel located right next to a
+            growing revolution.
+          </p>
+        </div>
+
+        <div className="home-hero-promo-actions">
+          <a
+            href="https://store.steampowered.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="home-hero-promo-primary"
+          >
+            <img src={steamLogo} alt="" className="home-hero-promo-steam" />
+            Add to Wishlist
+          </a>
+          <Link
+            to={flagshipGame.href ?? '/games'}
+            className="home-hero-promo-ghost"
+          >
+            More details <ArrowRight size={14} />
+          </Link>
+        </div>
+      </div>
+        </div>
+      </motion.div>
+    </motion.aside>
   );
 }
 
@@ -398,6 +495,7 @@ export default function StudioHome() {
   const [subscribed, setSubscribed] = useState(false);
   const [email, setEmail] = useState('');
   const [trailerOpen, setTrailerOpen] = useState(false);
+  const [promoOpen, setPromoOpen] = useState(true);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -473,6 +571,10 @@ export default function StudioHome() {
       <TrailerSection onOpen={() => setTrailerOpen(true)} />
 
       <TrailerModal open={trailerOpen} onClose={() => setTrailerOpen(false)} />
+
+      <AnimatePresence>
+        {promoOpen && <FloatingPromo onClose={() => setPromoOpen(false)} />}
+      </AnimatePresence>
 
       {/* ---------- Dispatch signup ---------- */}
       <section className="home-signup" id="contact">
