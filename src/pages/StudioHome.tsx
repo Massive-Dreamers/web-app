@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
 import { games } from '../data/games';
 import { dispatches } from '../data/dispatches';
+import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/StudioHome.css';
 
 const flagshipGame = games.find((g) => g.flagship);
@@ -492,21 +493,9 @@ function TrailerModal({ open, onClose }: { open: boolean; onClose: () => void })
 }
 
 export default function StudioHome() {
-  const [subscribed, setSubscribed] = useState(false);
-  const [email, setEmail] = useState('');
+  const signup = useNewsletterSignup('home-signup');
   const [trailerOpen, setTrailerOpen] = useState(false);
   const [promoOpen, setPromoOpen] = useState(true);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setTimeout(() => {
-        setSubscribed(false);
-        setEmail('');
-      }, 4000);
-    }
-  };
 
   return (
     <div className="studio-page-wrapper">
@@ -597,22 +586,36 @@ export default function StudioHome() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubscribe} className="home-signup-form">
+              <form onSubmit={signup.submit} className="home-signup-form">
                 <input
                   type="email"
                   placeholder="you@domain.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={signup.email}
+                  onChange={(e) => signup.updateEmail(e.target.value)}
                   required
                   className="home-signup-input"
                   aria-label="Email address"
                 />
-                <button type="submit" className="home-signup-btn">
-                  {subscribed ? 'Subscribed' : 'Subscribe'}
+                <input
+                  type="text"
+                  name="botcheck"
+                  className="newsletter-botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  value={signup.botcheck}
+                  onChange={(e) => signup.setBotcheck(e.target.value)}
+                />
+                <button type="submit" className="home-signup-btn" disabled={signup.sending}>
+                  {signup.sending
+                    ? 'Sending'
+                    : signup.status === 'success'
+                      ? 'Subscribed'
+                      : 'Subscribe'}
                 </button>
-                {subscribed && (
-                  <span className="home-signup-msg">
-                    Thank you. We&rsquo;ll write soon.
+                {signup.message && (
+                  <span className="home-signup-msg" role="status" aria-live="polite">
+                    {signup.message}
                   </span>
                 )}
               </form>

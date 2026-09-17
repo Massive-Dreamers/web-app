@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import buildingsBg from '../assets/buildings.png';
+import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/FinalCTA.css';
 
 export default function FinalCTA() {
+  const signup = useNewsletterSignup('final-cta');
+
   return (
     <section className="final-cta-section" id="cta">
       {/* Background Buildings Art & Atmosphere */}
@@ -25,10 +28,33 @@ export default function FinalCTA() {
           
           <div className="cta-newsletter-wrapper">
             <p className="cta-newsletter-text">Join the list and become part of this world.</p>
-            <div className="cta-newsletter-form">
-              <input type="email" placeholder="Enter your email" className="cta-newsletter-input" />
-              <button className="cta-newsletter-btn">Stay Up-to-Date</button>
-            </div>
+            <form className="cta-newsletter-form" onSubmit={signup.submit}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="cta-newsletter-input"
+                value={signup.email}
+                onChange={(e) => signup.updateEmail(e.target.value)}
+                required
+                aria-label="Email address"
+              />
+              <input
+                type="text"
+                name="botcheck"
+                className="newsletter-botcheck"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={signup.botcheck}
+                onChange={(e) => signup.setBotcheck(e.target.value)}
+              />
+              <button type="submit" className="cta-newsletter-btn" disabled={signup.sending}>
+                {signup.sending ? 'Sending' : 'Stay Up-to-Date'}
+              </button>
+            </form>
+            <p className="cta-newsletter-msg" role="status" aria-live="polite">
+              {signup.message}
+            </p>
           </div>
         </motion.div>
       </div>

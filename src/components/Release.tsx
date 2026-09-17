@@ -1,25 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, X, CheckCircle2 } from 'lucide-react';
 import steamLogo from '../assets/steamlogo.png';
+import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/Release.css';
 
 export default function Release() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const signup = useNewsletterSignup('release-modal');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setIsModalOpen(false);
-        setEmail('');
-      }, 3000);
-    }
+  const isSubmitted = signup.status === 'success';
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    await signup.submit(e);
   };
+
+  // Keep the original behaviour: the modal closes itself once the visitor
+  // has had a few seconds to read the confirmation.
+  useEffect(() => {
+    if (!isSubmitted) return;
+    const timer = setTimeout(() => setIsModalOpen(false), 3000);
+    return () => clearTimeout(timer);
+  }, [isSubmitted]);
 
   return (
     <section className="release-section" id="release">
@@ -79,14 +81,30 @@ export default function Release() {
                     <input 
                       type="email" 
                       placeholder="Enter your email" 
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      value={signup.email}
+                      onChange={(e) => signup.updateEmail(e.target.value)}
                       required
                       className="notify-modal-input" 
+                      aria-label="Email address"
                     />
-                    <button type="submit" className="notify-modal-submit">
-                      Notify Me
+                    <input
+                      type="text"
+                      name="botcheck"
+                      className="newsletter-botcheck"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      value={signup.botcheck}
+                      onChange={(e) => signup.setBotcheck(e.target.value)}
+                    />
+                    <button type="submit" className="notify-modal-submit" disabled={signup.sending}>
+                      {signup.sending ? 'Sending...' : 'Notify Me'}
                     </button>
+                    {signup.status !== 'success' && signup.message && (
+                      <p className="notify-modal-msg" role="status" aria-live="polite">
+                        {signup.message}
+                      </p>
+                    )}
                   </form>
                 </>
               ) : (

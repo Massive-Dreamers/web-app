@@ -158,6 +158,25 @@
   color: #ffffff;
 }
 
+.cta-newsletter-btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.cta-newsletter-btn:disabled:hover {
+  background: var(--text-main);
+  border-color: var(--text-main);
+  color: var(--bg-dark);
+}
+
+.cta-newsletter-msg {
+  min-height: 1.2em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
 @media (max-width: 1024px) {
   .cta-title {
     font-size: 8rem;

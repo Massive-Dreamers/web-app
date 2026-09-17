@@ -257,6 +257,24 @@
   transform: translateY(-1px);
 }
 
+.notify-modal-submit:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.notify-modal-submit:disabled:hover {
+  background: var(--accent-orange);
+  transform: none;
+}
+
+.notify-modal-msg {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  font-style: italic;
+  text-align: center;
+}
+
 .notify-modal-success {
   display: flex;
   flex-direction: column;

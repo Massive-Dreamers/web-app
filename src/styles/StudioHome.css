@@ -2542,6 +2542,16 @@
   color: var(--text-main);
 }
 
+.home-signup-btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.home-signup-btn:disabled:hover {
+  background: var(--text-main);
+  color: var(--bg-dark);
+}
+
 .home-signup-msg {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
