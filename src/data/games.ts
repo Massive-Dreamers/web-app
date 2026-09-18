@@ -19,6 +19,8 @@ export interface Game {
   flagship: boolean;
 }
 
+export const STEAM_URL = 'https://store.steampowered.com/app/5213330/Mind_Your_Stay/';
+
 export const games: Game[] = [
   {
     slug: 'mind-your-stay',

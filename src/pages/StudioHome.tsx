@@ -7,7 +7,7 @@ import steamLogo from '../assets/steamlogo.png';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
-import { games } from '../data/games';
+import { games, STEAM_URL } from '../data/games';
 import { dispatches } from '../data/dispatches';
 import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/StudioHome.css';
@@ -231,7 +231,7 @@ function FloatingPromo({ onClose }: { onClose: () => void }) {
 
         <div className="home-hero-promo-actions">
           <a
-            href="https://store.steampowered.com"
+            href={STEAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="home-hero-promo-primary"

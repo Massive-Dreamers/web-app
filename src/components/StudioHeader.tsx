@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import studioLogo from '../assets/studio_ship_transparent.png';
+import { STEAM_URL } from '../data/games';
 import '../styles/StudioHome.css';
 
 // Lightweight Social SVG Icons (exported for use across pages)
@@ -62,7 +63,7 @@ export default function StudioHeader() {
 
         <div className="studio-header-actions">
           <a 
-            href="https://store.steampowered.com" 
+            href={STEAM_URL}
             target="_blank" 
             rel="noopener noreferrer" 
             className="studio-header-subscribe-btn"

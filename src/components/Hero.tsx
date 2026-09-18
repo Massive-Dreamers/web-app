@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import steamLogo from '../assets/steamlogo.png';
+import { STEAM_URL } from '../data/games';
 import StudioHeader from './StudioHeader';
 import '../styles/Hero.css';
 
@@ -46,10 +47,10 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
             >
-              <button className="btn-solid">
+              <a href={STEAM_URL} target="_blank" rel="noopener noreferrer" className="btn-solid">
                 <img src={steamLogo} alt="Steam" className="steam-icon-btn" />
                 Add to Wishlist
-              </button>
+              </a>
               <button className="btn-outline" onClick={scrollToTrailer}>
                 Watch Trailer <Play size={13} fill="currentColor" className="icon-right" />
               </button>

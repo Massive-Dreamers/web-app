@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, X, CheckCircle2 } from 'lucide-react';
 import steamLogo from '../assets/steamlogo.png';
+import { STEAM_URL } from '../data/games';
 import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/Release.css';
 
@@ -41,10 +42,10 @@ export default function Release() {
           <h1 className="release-year">2027</h1>
           
           <div className="release-action">
-            <button className="wishlist-btn">
+            <a href={STEAM_URL} target="_blank" rel="noopener noreferrer" className="wishlist-btn">
               <img src={steamLogo} alt="Steam" className="steam-btn-icon" />
               Wishlist Now <span>→</span>
-            </button>
+            </a>
             <button className="notify-btn" onClick={() => setIsModalOpen(true)}>
               <Bell size={15} /> Get Notified
             </button>
