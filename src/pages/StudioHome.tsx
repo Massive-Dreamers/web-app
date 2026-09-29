@@ -3,16 +3,15 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play, ArrowDown, X } from 'lucide-react';
 import trailerVideo from '../assets/trailer.mp4';
-import steamLogo from '../assets/steamlogo.png';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
-import { games, STEAM_URL } from '../data/games';
+import { games } from '../data/games';
 import { dispatches } from '../data/dispatches';
 import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/StudioHome.css';
 
-const flagshipGame = games.find((g) => g.flagship);
+const STEAM_WIDGET_APP_ID = 5213330;
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -161,8 +160,6 @@ function HeroSection() {
 }
 
 function FloatingPromo({ onClose }: { onClose: () => void }) {
-  if (!flagshipGame) return null;
-
   return (
     <motion.aside
       className="home-floating-promo"
@@ -203,51 +200,15 @@ function FloatingPromo({ onClose }: { onClose: () => void }) {
           <X size={14} />
         </button>
 
-        <div className="home-floating-promo-inner">
-      <Link to={flagshipGame.href ?? '/games'} className="home-hero-promo-media">
-        <img src={flagshipGame.image} alt={flagshipGame.title} />
-        <span className="home-hero-promo-tag">
-          <span className="home-hero-promo-pulse" aria-hidden />
-          New
-        </span>
-      </Link>
-
-      <div className="home-hero-promo-body">
-        <div className="home-hero-promo-info">
-          <div className="home-hero-promo-meta">
-            {flagshipGame.statusLabel} &middot; {flagshipGame.release}
-          </div>
-          <Link
-            to={flagshipGame.href ?? '/games'}
-            className="home-hero-promo-title"
-          >
-            {flagshipGame.title}
-          </Link>
-          <p className="home-hero-promo-desc">
-            Talk to the guests of Safe Haven &mdash; a hotel located right next to a
-            growing revolution.
-          </p>
-        </div>
-
-        <div className="home-hero-promo-actions">
-          <a
-            href={STEAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="home-hero-promo-primary"
-          >
-            <img src={steamLogo} alt="" className="home-hero-promo-steam" />
-            Add to Wishlist
-          </a>
-          <Link
-            to={flagshipGame.href ?? '/games'}
-            className="home-hero-promo-ghost"
-          >
-            More details <ArrowRight size={14} />
-          </Link>
-        </div>
-      </div>
-        </div>
+        <iframe
+          className="home-floating-promo-widget"
+          src={`https://store.steampowered.com/widget/${STEAM_WIDGET_APP_ID}/`}
+          title="Steam store widget"
+          width="646"
+          height="190"
+          frameBorder="0"
+          loading="lazy"
+        />
       </motion.div>
     </motion.aside>
   );
