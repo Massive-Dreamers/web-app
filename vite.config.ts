@@ -1,4 +1,4 @@
-import { copyFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync } from 'node:fs'
 import path from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -19,6 +19,11 @@ function spaFallback(): Plugin {
     closeBundle() {
       const dir = path.resolve(root, outDir)
       copyFileSync(path.join(dir, 'index.html'), path.join(dir, '404.html'))
+
+      // /links is printed on a QR code, so it gets a real file and a 200 response
+      // instead of relying on the 404 fallback like the other routes.
+      mkdirSync(path.join(dir, 'links'), { recursive: true })
+      copyFileSync(path.join(dir, 'index.html'), path.join(dir, 'links', 'index.html'))
     },
   }
 }

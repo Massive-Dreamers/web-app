@@ -5,6 +5,7 @@ import Games from './pages/Games';
 import About from './pages/About';
 import News from './pages/News';
 import Contact from './pages/Contact';
+import Links from './pages/Links';
 import GamePage from './pages/GamePage';
 import NotFound from './components/NotFound';
 import LoadingScreen from './components/LoadingScreen';
@@ -27,7 +28,11 @@ function ScrollToTop() {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  // /links is the printed QR target: people arrive on a phone wanting a link,
+  // so it skips the studio intro.
+  const [isLoading, setIsLoading] = useState(
+    () => !/^\/links\/?$/.test(window.location.pathname),
+  );
 
   return (
     <>
@@ -42,6 +47,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/mind-your-stay" element={<GamePage />} />
+          <Route path="/links" element={<Links />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
