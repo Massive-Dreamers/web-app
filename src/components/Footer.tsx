@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import studioLogo from '../assets/studio_ship_transparent.png';
+import { socials } from '../data/socials';
 import '../styles/Footer.css';
 
 export default function Footer() {
@@ -33,9 +34,11 @@ export default function Footer() {
             <div className="footer-link-group">
               <h4 className="footer-col-title">Community</h4>
               <ul>
-                <li><a href="https://www.instagram.com/massivedreamersstudio?igsi=c2dqaGpoY3NiMmE0" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                <li><a href="https://www.linkedin.com/company/massivedreamers/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                <li><a href="https://www.facebook.com/share/1JNquNFSpc/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                {socials.map((social) => (
+                  <li key={social.label}>
+                    <a href={social.href} target="_blank" rel="noopener noreferrer">{social.label}</a>
+                  </li>
+                ))}
               </ul>
             </div>
             
