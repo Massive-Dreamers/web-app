@@ -1693,7 +1693,7 @@
   position: fixed;
   right: clamp(1.25rem, 3vw, 2.25rem);
   bottom: clamp(1.25rem, 3vh, 2rem);
-  width: min(646px, calc(100vw - 2.5rem));
+  width: min(540px, calc(100vw - 2.5rem));
   z-index: 900;
   will-change: transform;
 }
@@ -1708,34 +1708,41 @@
   will-change: transform;
 }
 
-.home-floating-promo-widget {
-  display: block;
-  width: 100%;
-  height: 190px;
-  border: 0;
+/* The float wrapper already supplies the frame and the lift. */
+.home-floating-promo .steam-card {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.home-floating-promo .steam-card:hover {
+  transform: none;
+}
+
+/* Close sits inside the card header; keep the title clear of it. */
+.home-floating-promo .steam-card-head {
+  padding-right: 3rem;
 }
 
 .home-hero-promo-close {
   position: absolute;
-  top: -13px;
-  right: -13px;
-  width: 26px;
-  height: 26px;
+  top: 0.9rem;
+  right: 0.6rem;
+  width: 28px;
+  height: 28px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-main);
-  background: rgba(10, 12, 15, 0.92);
-  border: 1px solid rgba(217, 119, 70, 0.55);
-  border-radius: 50%;
+  color: #9099a1;
+  background: transparent;
+  border-radius: 2px;
   cursor: pointer;
   transition: color 0.2s ease, background 0.2s ease;
   z-index: 3;
 }
 
 .home-hero-promo-close:hover {
-  color: var(--bg-dark);
-  background: var(--accent-orange);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 720px) {

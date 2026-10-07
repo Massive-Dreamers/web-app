@@ -5,13 +5,12 @@ import { ArrowRight, Play, ArrowDown, X } from 'lucide-react';
 import trailerVideo from '../assets/trailer.mp4';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
+import SteamCard from '../components/SteamCard';
 import AbstractField from '../components/AbstractField';
 import { games } from '../data/games';
 import { dispatches } from '../data/dispatches';
 import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/StudioHome.css';
-
-const STEAM_WIDGET_APP_ID = 5213330;
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -197,18 +196,10 @@ function FloatingPromo({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           aria-label="Dismiss"
         >
-          <X size={14} />
+          <X size={18} />
         </button>
 
-        <iframe
-          className="home-floating-promo-widget"
-          src={`https://store.steampowered.com/widget/${STEAM_WIDGET_APP_ID}/`}
-          title="Steam store widget"
-          width="646"
-          height="190"
-          frameBorder="0"
-          loading="lazy"
-        />
+        <SteamCard compact />
       </motion.div>
     </motion.aside>
   );

@@ -1,0 +1,166 @@
+/* ==========================================================================
+   STEAM CARD — Steam's own palette, wishlist bar kept inside the card
+   ========================================================================== */
+.steam-card {
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  flex-direction: column;
+  background: linear-gradient(135deg, #3b4351 0%, #282e39 100%);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.9);
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.steam-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 44px -18px rgba(0, 0, 0, 1);
+}
+
+.steam-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1rem 0;
+}
+
+.steam-card-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.steam-card-title span {
+  color: #9099a1;
+  font-weight: 400;
+}
+
+.steam-card-logo {
+  flex-shrink: 0;
+  color: #9099a1;
+}
+
+.steam-card-body {
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 14fr);
+  gap: 0.85rem;
+  align-items: start;
+  padding: 0.85rem 1rem 1rem;
+}
+
+.steam-card-capsule {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 460 / 215;
+  object-fit: cover;
+}
+
+.steam-card-copy {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #c9c9c9;
+}
+
+.steam-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.6rem 0.6rem 1rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.steam-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #a4d007;
+}
+
+.steam-card-status svg {
+  color: #fff;
+}
+
+.steam-card-btn {
+  padding: 0.65rem 1.1rem;
+  border-radius: 2px;
+  background: linear-gradient(to right, #75b022 5%, #588a1b 95%);
+  color: #d2efa9;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.steam-card:hover .steam-card-btn {
+  background: linear-gradient(to right, #8ed629 5%, #6aa621 95%);
+  color: #fff;
+}
+
+/* ---------- Narrow phones ---------- */
+@media (max-width: 460px) {
+  .steam-card--compact .steam-card-copy {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+  }
+
+  /* Store-tile layout: artwork edge to edge on top, then title, then the wishlist bar.
+     The description is dropped; the page already introduces the game above the card. */
+  .steam-card:not(.steam-card--compact) .steam-card-body {
+    display: block;
+    order: -1;
+    padding: 0;
+  }
+
+  .steam-card:not(.steam-card--compact) .steam-card-copy {
+    display: none;
+  }
+
+  .steam-card:not(.steam-card--compact) .steam-card-head {
+    padding: 0.85rem 1rem;
+  }
+
+  .steam-card:not(.steam-card--compact) .steam-card-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .steam-card:not(.steam-card--compact) .steam-card-title {
+    font-size: 1.1rem;
+  }
+
+  .steam-card-status {
+    white-space: nowrap;
+    gap: 0.5rem;
+  }
+
+  .steam-card-btn {
+    padding: 0.65rem 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .steam-card-foot {
+    padding-left: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .steam-card-status,
+  .steam-card-btn {
+    font-size: 0.82rem;
+  }
+
+  .steam-card-btn {
+    padding: 0.6rem 0.7rem;
+  }
+
+  .steam-card:not(.steam-card--compact) .steam-card-title {
+    font-size: 0.98rem;
+    white-space: nowrap;
+  }
+}
