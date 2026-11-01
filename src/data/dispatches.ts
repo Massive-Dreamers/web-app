@@ -30,8 +30,8 @@ export const dispatches: Dispatch[] = [
   {
     id: 'regular-npc-in-a-disco-like',
     title: 'What if you were a regular NPC in a Disco-like?',
-    category: 'Devlog',
-    categoryKey: 'devlog',
+    category: 'Announcement',
+    categoryKey: 'announcement',
     date: 'November 2026',
     readTime: '3 min',
     excerpt:
