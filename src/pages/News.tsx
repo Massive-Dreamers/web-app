@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
@@ -80,7 +81,7 @@ export default function News() {
                   ease: easeOut,
                 }}
               >
-                <a href="#" className="news-card-inner" onClick={(e) => e.preventDefault()}>
+                <Link to={article.href} className="news-card-inner">
                   <div className="news-card-media">
                     <img
                       src={article.image}
@@ -106,7 +107,7 @@ export default function News() {
                       Read <ArrowUpRight size={14} />
                     </span>
                   </div>
-                </a>
+                </Link>
               </motion.article>
             ))}
           </div>

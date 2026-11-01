@@ -4,6 +4,7 @@ import StudioHome from './pages/StudioHome';
 import Games from './pages/Games';
 import About from './pages/About';
 import News from './pages/News';
+import NewsArticle from './pages/NewsArticle';
 import Contact from './pages/Contact';
 import Links from './pages/Links';
 import GamePage from './pages/GamePage';
@@ -45,6 +46,7 @@ function App() {
           <Route path="/games" element={<Games />} />
           <Route path="/about" element={<About />} />
           <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<NewsArticle />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/mind-your-stay" element={<GamePage />} />
           <Route path="/links" element={<Links />} />
