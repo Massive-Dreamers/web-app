@@ -8,7 +8,8 @@ export type DispatchBlock =
   | { type: 'p'; text: string }
   | { type: 'h2'; text: string }
   | { type: 'image'; src: string; alt: string; caption?: string }
-  | { type: 'list'; items: string[] };
+  | { type: 'list'; items: string[] }
+  | { type: 'button'; label: string; to: string };
 
 export interface Dispatch {
   id: string;
@@ -96,6 +97,7 @@ export const dispatches: Dispatch[] = [
         type: 'p',
         text: 'We’ll be more than pleased to take all of these ideas into consideration.',
       },
+      { type: 'button', label: 'We are open for feedbacks', to: '/contact' },
       {
         type: 'p',
         text: 'And, one last thing…you can wishlist Mind Your Stay right now, and follow the page for more updates.',

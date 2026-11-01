@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
@@ -25,6 +25,14 @@ function Block({ block }: { block: DispatchBlock }) {
             <li key={item}>{item}</li>
           ))}
         </ul>
+      );
+    case 'button':
+      return (
+        <p>
+          <Link to={block.to} className="article-inline-btn">
+            {block.label} <ArrowRight size={15} />
+          </Link>
+        </p>
       );
     case 'image':
       return (
