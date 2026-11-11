@@ -23,6 +23,8 @@ export interface Dispatch {
   featured?: boolean;
   href: string;
   author?: string;
+  // Link-preview image for social sites: a 1200x630 file under public/og/.
+  ogImage?: string;
   body: DispatchBlock[];
 }
 
@@ -40,6 +42,7 @@ export const dispatches: Dispatch[] = [
     featured: true,
     href: '/news/regular-npc-in-a-disco-like',
     author: 'Niyazi from Massive Dreamers team',
+    ogImage: '/og/mind-your-stay.jpg',
     body: [
       {
         type: 'p',
