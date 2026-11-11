@@ -12,6 +12,7 @@ interface PageMeta {
   description: string
   image?: string
   type?: 'website' | 'article'
+  publishedAt?: string
 }
 
 // Social sites (Facebook, X, LinkedIn, Telegram...) don't run JavaScript, so link
@@ -67,6 +68,7 @@ interface DispatchMeta {
   id: string
   title: string
   excerpt: string
+  publishedAt: string
   ogImage?: string
 }
 
@@ -83,6 +85,7 @@ async function loadArticlePages(root: string): Promise<PageMeta[]> {
       description: d.excerpt,
       image: d.ogImage,
       type: 'article',
+      publishedAt: d.publishedAt,
     }))
   } catch (err) {
     // A broken preview shouldn't break the deploy: articles fall back to the default tags.
@@ -105,7 +108,7 @@ function seoTags(page: PageMeta) {
   const url = `${SITE_URL}${page.path === '/' ? '/' : `${page.path}/`}`
   const image = `${SITE_URL}${page.image ?? DEFAULT_IMAGE}`
 
-  return [
+  const tags = [
     `<title>${title}</title>`,
     `<meta name="description" content="${description}" />`,
     `<meta property="og:type" content="${page.type ?? 'website'}" />`,
@@ -120,7 +123,11 @@ function seoTags(page: PageMeta) {
     `<meta name="twitter:title" content="${title}" />`,
     `<meta name="twitter:description" content="${description}" />`,
     `<meta name="twitter:image" content="${image}" />`,
-  ].join('\n    ')
+  ]
+  if (page.publishedAt) {
+    tags.push(`<meta property="article:published_time" content="${escapeHtml(page.publishedAt)}" />`)
+  }
+  return tags.join('\n    ')
 }
 
 const SEO_BLOCK = /<!--seo:start-->[\s\S]*?<!--seo:end-->/

@@ -5,7 +5,12 @@ import { ArrowUpRight } from 'lucide-react';
 import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
-import { dispatches, type NewsCategory as DispatchCategory } from '../data/dispatches';
+import {
+  dispatches,
+  formatDispatchDate,
+  formatDispatchTime,
+  type NewsCategory as DispatchCategory,
+} from '../data/dispatches';
 import '../styles/StudioHome.css';
 import '../styles/News.css';
 
@@ -18,6 +23,7 @@ const filters: { key: NewsFilter; label: string }[] = [
   { key: 'announcement', label: 'Announcements' },
   { key: 'devlog', label: 'Devlogs' },
   { key: 'design', label: 'Design Diaries' },
+  { key: 'tech', label: 'Tech' },
 ];
 
 export default function News() {
@@ -94,7 +100,9 @@ export default function News() {
 
                   <div className="news-card-body">
                     <div className="news-card-meta">
-                      <span>{article.date}</span>
+                      <time dateTime={article.publishedAt}>
+                        {formatDispatchDate(article.publishedAt)}, {formatDispatchTime(article.publishedAt)}
+                      </time>
                       <span aria-hidden>&middot;</span>
                       <span>{article.readTime}</span>
                     </div>

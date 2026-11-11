@@ -1,7 +1,7 @@
 import roomsImg from '../assets/rooms.png';
 
-export type NewsCategory = 'announcement' | 'devlog' | 'design';
-export type NewsCategoryLabel = 'Announcement' | 'Devlog' | 'Design Diary';
+export type NewsCategory = 'announcement' | 'devlog' | 'design' | 'tech';
+export type NewsCategoryLabel = 'Announcement' | 'Devlog' | 'Design Diary' | 'Tech';
 
 // One piece of an article body, rendered in order on the article page.
 export type DispatchBlock =
@@ -16,7 +16,8 @@ export interface Dispatch {
   title: string;
   category: NewsCategoryLabel;
   categoryKey: NewsCategory;
-  date: string;
+  // When the article went live, as ISO 8601 with the studio's offset (Baku, +04:00).
+  publishedAt: string;
   readTime: string;
   excerpt: string;
   image: string;
@@ -34,7 +35,7 @@ export const dispatches: Dispatch[] = [
     title: 'What if you were a regular NPC in a Disco-like?',
     category: 'Announcement',
     categoryKey: 'announcement',
-    date: 'November 2026',
+    publishedAt: '2026-11-01T18:50:00+04:00',
     readTime: '3 min',
     excerpt:
       'In Mind Your Stay, the player IS the NPC: a receptionist with no memories and no character traits, deciding who gets to spend the night at Safe Haven.',
@@ -108,3 +109,20 @@ export const dispatches: Dispatch[] = [
     ],
   },
 ];
+
+// "1 November 2026" — shown in the reader's own time zone.
+export function formatDispatchDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+
+// "18:50" — shown in the reader's own time zone.
+export function formatDispatchTime(iso: string): string {
+  return new Date(iso).toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}

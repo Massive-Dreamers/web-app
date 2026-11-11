@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 import SteamCard from '../components/SteamCard';
 import AbstractField from '../components/AbstractField';
 import { games } from '../data/games';
-import { dispatches } from '../data/dispatches';
+import { dispatches, formatDispatchDate } from '../data/dispatches';
 import { useNewsletterSignup } from '../hooks/useNewsletterSignup';
 import '../styles/StudioHome.css';
 
@@ -30,7 +30,7 @@ const dispatchPreview = dispatches.slice(0, 3).map((d) => ({
   id: d.id,
   title: d.title,
   category: d.category,
-  date: d.date,
+  publishedAt: d.publishedAt,
   image: d.image,
   href: d.href,
 }));
@@ -493,7 +493,7 @@ export default function StudioHome() {
                     <div className="home-dispatch-meta">
                       <span className="home-dispatch-cat">{d.category}</span>
                       <span aria-hidden>&middot;</span>
-                      <span>{d.date}</span>
+                      <time dateTime={d.publishedAt}>{formatDispatchDate(d.publishedAt)}</time>
                     </div>
                     <h3 className="home-dispatch-title">{d.title}</h3>
                     <span className="home-dispatch-read">

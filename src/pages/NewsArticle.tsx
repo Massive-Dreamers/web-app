@@ -5,7 +5,12 @@ import StudioHeader from '../components/StudioHeader';
 import Footer from '../components/Footer';
 import AbstractField from '../components/AbstractField';
 import NotFound from '../components/NotFound';
-import { dispatches, type DispatchBlock } from '../data/dispatches';
+import {
+  dispatches,
+  formatDispatchDate,
+  formatDispatchTime,
+  type DispatchBlock,
+} from '../data/dispatches';
 import { STEAM_URL } from '../data/games';
 import '../styles/StudioHome.css';
 import '../styles/News.css';
@@ -72,7 +77,9 @@ export default function NewsArticle() {
           <header className="article-header">
             <div className="news-card-meta">
               <span className="article-tag">{article.category}</span>
-              <span>{article.date}</span>
+              <time dateTime={article.publishedAt}>
+                {formatDispatchDate(article.publishedAt)}, {formatDispatchTime(article.publishedAt)}
+              </time>
               <span aria-hidden>&middot;</span>
               <span>{article.readTime}</span>
             </div>
